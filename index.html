@@ -17,13 +17,15 @@
     }
     .pdf-container {
         display: flex;
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
         justify-content: center;
         align-items: center;
         margin: 10px 0;
     }
     .pdf {
-        width: 400px;
-        height: 500px;
+        width: 90%; /* Adjusted width for smaller screens */
+        max-width: 400px; /* Limit width for larger screens */
+        height: 600px; /* Increased height */
         border: 1px solid #ccc;
         margin: 10px;
     }
@@ -36,6 +38,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+        .pdf-container {
+            flex-direction: column; /* Change to single column layout */
+            align-items: stretch; /* Stretch items to full width */
+        }
     }
 </style>
 </head>
@@ -52,22 +62,16 @@
             <p class="pdf-title">Social Media Posts</p>
             <embed class="pdf" src="social-media-posts.pdf" type="application/pdf" />
         </div>
-
-        <div class="pdf-container">
-            <div>
-                <p class="pdf-title">Gaming Characters</p>
-                <embed class="pdf" src="gaming-characters.pdf" type="application/pdf" />
-            </div>
+        <div>
+            <p class="pdf-title">Gaming Characters</p>
+            <embed class="pdf" src="gaming-characters.pdf" type="application/pdf" />
         </div>
-        <div class="pdf-container">
-            <div>
-                <p class="pdf-title">Amazon Book Covers</p>
-                <embed class="pdf" src="book-covers.pdf" type="application/pdf" />
-            </div>
+        <div>
+            <p class="pdf-title">Amazon Book Covers</p>
+            <embed class="pdf" src="book-covers.pdf" type="application/pdf" />
         </div>
     </div>
-
-
+    <p>For more details, you can download my full portfolio <a href="Eman's Portfolio.pdf">here</a>.</p>
 </div>
 
 </body>
