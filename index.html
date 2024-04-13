@@ -9,43 +9,69 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        background-color: #f4f4f4;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+        color: #333;
     }
     .pdf-container {
-        display: flex;
-        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+        grid-gap: 30px;
         justify-content: center;
         align-items: center;
-        margin: 10px 0;
+        margin: 40px;
     }
     .pdf {
-        width: 90%; /* Adjusted width for smaller screens */
-        max-width: 400px; /* Limit width for larger screens */
-        height: 600px; /* Increased height */
-        border: 1px solid #ccc;
-        margin: 10px;
+        width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+    .pdf:hover {
+        transform: scale(1.05);
     }
     .pdf-title {
         text-align: center;
-        font-size: 18px;
-        margin-bottom: 5px;
+        font-size: 20px;
+        color: #444;
+        margin-top: 15px;
     }
     .center-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        margin-top: 40px;
     }
-
-    /* Media query for smaller screens */
-    @media (max-width: 768px) {
-        .pdf-container {
-            flex-direction: column; /* Change to single column layout */
-            align-items: stretch; /* Stretch items to full width */
-        }
+    .pdf-controls {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .pdf-zoom {
+        margin: 0 10px;
+        padding: 8px 16px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+    .pdf-zoom:hover {
+        background-color: #0056b3;
+    }
+    .download-link {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+    .download-link:hover {
+        color: #0056b3;
     }
 </style>
 </head>
@@ -57,22 +83,75 @@
         <div>
             <p class="pdf-title">Vectors</p>
             <embed class="pdf" src="vectors.pdf" type="application/pdf" />
+            <a class="download-link" href="vectors.pdf" download="Vectors.pdf">Download Vectors PDF</a>
         </div>
         <div>
             <p class="pdf-title">Social Media Posts</p>
             <embed class="pdf" src="social-media-posts.pdf" type="application/pdf" />
+            <a class="download-link" href="social-media-posts.pdf" download="Social Media Posts.pdf">Download Social Media Posts PDF</a>
         </div>
         <div>
             <p class="pdf-title">Gaming Characters</p>
             <embed class="pdf" src="gaming-characters.pdf" type="application/pdf" />
+            <a class="download-link" href="gaming-characters.pdf" download="Gaming Characters.pdf">Download Gaming Characters PDF</a>
         </div>
         <div>
             <p class="pdf-title">Amazon Book Covers</p>
             <embed class="pdf" src="book-covers.pdf" type="application/pdf" />
+            <a class="download-link" href="book-covers.pdf" download="Amazon Book Covers.pdf">Download Amazon Book Covers PDF</a>
         </div>
+        <!-- New PDF rows -->
+        <div>
+            <p class="pdf-title">Logo Design</p>
+            <embed class="pdf" src="logo-design.pdf" type="application/pdf" />
+            <a class="download-link" href="logo-design.pdf" download="Logo Design.pdf">Download Logo Design PDF</a>
+        </div>
+        <div>
+            <p class="pdf-title">Poster Design</p>
+            <embed class="pdf" src="poster-design.pdf" type="application/pdf" />
+            <a class="download-link" href="poster-design.pdf" download="Poster Design.pdf">Download Poster Design PDF</a>
+        </div>
+        <div>
+            <p class="pdf-title">UI UX Design</p>
+            <embed class="pdf" src="uiux-gamification-design.pdf" type="application/pdf" />
+            <a class="download-link" href="uiux-gamification-design.pdf" download="UI UX Design.pdf">Download UI UX Design PDF</a>
+        </div>
+        <div>
+            <p class="pdf-title">Website Design</p>
+            <embed class="pdf" src="website-design.pdf" type="application/pdf" />
+            <a class="download-link" href="website-design.pdf" download="Website Design.pdf">Download Website Design PDF</a>
+        </div>
+        <div>
+            <p class="pdf-title">Brochure Design</p>
+            <embed class="pdf" src="company-brochure-design.pdf" type="application/pdf" />
+            <a class="download-link" href="company-brochure-design.pdf" download="Brochure Design.pdf">Download Brochure Design PDF</a>
+        </div>
+        <!-- End of new PDF rows -->
     </div>
-    <p>For more details, you can download my full portfolio <a href="https://drive.google.com/file/d/1WTuceUHRzKclYzzToLktem7L1FU6oAvJ/view">here</a>.</p>
+    <div class="pdf-controls">
+        <button class="pdf-zoom" onclick="zoomIn()">Zoom In</button>
+        <button class="pdf-zoom" onclick="zoomOut()">Zoom Out</button>
+    </div>
+    <p style="text-align: center;">For more details, you can download my full portfolio <a href="https://drive.google.com/file/d/1WTuceUHRzKclYzzToLktem7L1FU6oAvJ/view">here</a>.</p>
 </div>
+
+<script>
+    function zoomIn() {
+        var pdfs = document.querySelectorAll('.pdf');
+        pdfs.forEach(function(pdf) {
+            pdf.style.width = (parseFloat(window.getComputedStyle(pdf).width) * 1.1) + 'px';
+            pdf.style.height = (parseFloat(window.getComputedStyle(pdf).height) * 1.1) + 'px';
+        });
+    }
+
+    function zoomOut() {
+        var pdfs = document.querySelectorAll('.pdf');
+        pdfs.forEach(function(pdf) {
+            pdf.style.width = (parseFloat(window.getComputedStyle(pdf).width) * 0.9) + 'px';
+            pdf.style.height = (parseFloat(window.getComputedStyle(pdf).height) * 0.9) + 'px';
+        });
+    }
+</script>
 
 </body>
 </html>
